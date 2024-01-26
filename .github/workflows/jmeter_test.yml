@@ -1,0 +1,32 @@
+name: JMeter Load Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  jmeter_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Run JMeter Tests
+      run: |
+        wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.4.1.tgz
+        tar -xzf apache-jmeter-5.4.1.tgz
+        ./apache-jmeter-5.4.1/bin/jmeter -n -t delta_load_test.groovy -l test_results.jtl
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: jmeter-results
+        path: test_results.jtl
