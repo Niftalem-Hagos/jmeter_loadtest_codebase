@@ -1,0 +1,24 @@
+name: JMeter Load Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_load_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up JMeter
+      run: |
+        wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.tgz
+        tar -xzf apache-jmeter-5.4.1.tgz
+        export PATH=$PATH:$(pwd)/apache-jmeter-5.4.1/bin
+
+    - name: Run JMeter Load Test
+      run: |
+        jmeter -n -t delta_load_test.groovy
