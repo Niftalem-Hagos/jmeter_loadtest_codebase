@@ -21,4 +21,4 @@ jobs:
 
     - name: Run JMeter Load Test
       run: |
-        jmeter -n -t delta_load_test.groovy
+        jmeter -n -t ./delta_load_test.groovy
