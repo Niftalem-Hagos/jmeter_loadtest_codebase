@@ -21,9 +21,9 @@ jobs:
 
     - name: Run JMeter Tests
       run: |
-        wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.6.tgz
-        tar -xzf apache-jmeter-5.6.tgz
-        ./apache-jmeter-5.6/bin/jmeter -n -t delta_load_test.groovy -l test_results.jtl
+        wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.5.tgz
+        tar -xzf apache-jmeter-5.5.tgz
+        ./apache-jmeter-5.5/bin/jmeter -n -t delta_load_test.groovy -l test_results.jtl
 
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
